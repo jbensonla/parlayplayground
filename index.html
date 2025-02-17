@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>$PPLAY: Parlay Playground</title>
   <style>
-    /* Reset and base styles */
+    /* Reset & Base */
     * {
       margin: 0;
       padding: 0;
@@ -16,12 +16,19 @@
       line-height: 1.6;
       color: #333;
       background: #f4f4f4;
+      scroll-behavior: smooth; /* Smooth scrolling for anchor links */
     }
     a {
       color: #e50914;
       text-decoration: none;
+      transition: color 0.2s ease;
     }
-    header, footer {
+    a:hover {
+      color: #ff3366;
+    }
+
+    /* Header */
+    header {
       background: #222;
       color: #fff;
       padding: 20px 0;
@@ -34,15 +41,12 @@
       justify-content: space-between;
       padding: 0 20px;
     }
-    /* Logo and Title */
-    .logo-title {
-      display: flex;
-      align-items: center;
-    }
-    /* CHANGES HERE: Removed the logo image from the header. 
-       If you want to keep it, just comment out the <img> line instead. */
     .logo-title h1 {
       font-size: 1.8em;
+      transition: color 0.2s ease;
+    }
+    .logo-title h1:hover {
+      color: #ff3366;
     }
     nav ul {
       list-style: none;
@@ -55,6 +59,167 @@
       color: #fff;
       font-size: 1em;
     }
+
+    /* Hero Section */
+    #hero {
+      position: relative;
+      min-height: 70vh;
+      background: url('images/pplay_poker.png') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+    #hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    .hero-logo {
+      display: block;
+      margin-bottom: 5px;
+      width: 950px;
+      height: auto;
+    }
+    .hero-content h2 {
+      color: #ff0099; /* Pink accent */
+      font-size: 2.2em;
+      margin: 10px 0 5px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .hero-content p {
+      color: #ff0099;
+      margin: 0 0 20px;
+      font-size: 1.2em;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    /* CTA Form (Join the Playground) - Frosted Glass */
+    .cta-container {
+      position: absolute;
+      top: 20%;
+      right: 5%;
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px) saturate(180%);
+      -webkit-backdrop-filter: blur(8px) saturate(180%);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      width: 300px;
+      transition: all 0.3s ease;
+    }
+    .cta-container:hover {
+      box-shadow: 0 12px 48px rgba(31, 38, 135, 0.5);
+    }
+    .cta-container h3 {
+      color: #e50914;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .cta-container label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: bold;
+    }
+    .cta-container input[type="email"],
+    .cta-container input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .cta-container button {
+      width: 100%;
+      padding: 10px;
+      background: #e50914;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .cta-container button:hover {
+      background: #ff3366;
+      transform: scale(1.03);
+    }
+
+    /* NFT Mint Section */
+    #mint {
+      background: #fff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    #mint .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    #mint .section-title {
+      margin-bottom: 30px;
+      color: #e50914;
+      font-size: 2em;
+    }
+    #mint p {
+      margin-bottom: 20px;
+      font-size: 1.1em;
+      color: #444;
+    }
+    #mint .dropzone {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 20px;
+      padding: 40px;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      text-align: center;
+      background: #f9f9f9;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    #mint .dropzone:hover {
+      background: #fff;
+      border-color: #e50914;
+    }
+    #mint .dropzone p {
+      color: #666;
+      font-size: 1em;
+    }
+    #mint .btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: #e50914;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    #mint .btn:hover {
+      background: #ff3366;
+      transform: scale(1.05);
+    }
+
+    /* Sections (About, Features, etc.) */
     section {
       padding: 60px 20px;
     }
@@ -67,56 +232,23 @@
       margin-bottom: 40px;
       font-size: 2em;
       color: #222;
-    }
-    /* Hero Section */
-    #hero {
-      background: url('images/pplay_poker.png') no-repeat center center/cover;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
       position: relative;
     }
-    #hero::before {
+    .section-title::after {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 1;
-    }
-    #hero .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-    #hero h2 {
-      font-size: 3em;
-      margin-bottom: 20px;
-    }
-    #hero p {
-      font-size: 1.2em;
-      margin-bottom: 30px;
-    }
-    .btn {
-      padding: 15px 30px;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
       background: #e50914;
-      color: #fff;
-      border: none;
-      font-size: 1.1em;
-      border-radius: 5px;
-      cursor: pointer;
+      border-radius: 2px;
     }
-
-    /* CHANGES HERE: Add a larger hero-logo class for the $PPLAY logo in the hero */
-    .hero-logo {
-      display: block;       /* Ensures it’s treated like a block element */
-      margin: 0 auto 20px;  /* Center horizontally (auto) and add bottom space */
-      width: 1500px;         /* Increase or decrease as needed */
-      height: auto;         /* Keep aspect ratio */
+    .about-image {
+      display: block;
+      margin: 20px auto;
+      max-width: 200px;
     }
 
     /* Features & Roadmap Layouts */
@@ -132,58 +264,60 @@
       border-radius: 5px;
       flex: 1 1 300px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+    }
+    .grid-item:hover {
+      transform: scale(1.02);
     }
     ul {
       list-style: disc inside;
       margin-top: 20px;
     }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
     footer p {
       margin: 10px 0;
-      text-align: center;
     }
-    /* Image style in About Section */
-    .about-image {
-      display: block;
-      margin: 20px auto;
-      max-width: 200px;
-    }
-    /* Responsive adjustments */
+
+    /* Responsive */
     @media (max-width: 768px) {
-      .header-container {
-        flex-direction: column;
-        align-items: flex-start;
+      .hero-content h2 {
+        font-size: 1.8em;
       }
-      nav ul {
-        flex-direction: column;
-        margin-top: 10px;
-      }
-      nav ul li {
-        margin: 5px 0;
-      }
-      #hero h2 {
-        font-size: 2em;
-      }
-      #hero p {
+      .hero-content p {
         font-size: 1em;
       }
-      .hero-logo {
-        width: 150px; /* Slightly smaller on mobile, if desired */
+      .cta-container {
+        position: static; /* Remove absolute for small screens */
+        margin: 20px auto 0;
+        right: auto;
+        top: auto;
+        width: 90%;
+      }
+      .cta-container:hover {
+        box-shadow: none;
       }
     }
   </style>
 </head>
 <body>
+
   <!-- Header and Navigation -->
   <header>
     <div class="header-container">
       <div class="logo-title">
-        <!-- Logo removed or commented out here. Only text remains. -->
-        <!-- <img src="images/pplay_logo.png" alt="$PPLAY Logo"> -->
         <h1>Parlay Playground</h1>
       </div>
       <nav>
         <ul>
           <li><a href="#hero">Home</a></li>
+          <li><a href="#mint">Mint NFT</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#features">Features</a></li>
           <li><a href="#roadmap">Roadmap</a></li>
@@ -197,14 +331,37 @@
 
   <!-- Hero Section -->
   <section id="hero">
+    <!-- CTA Form on the Right (Frosted Glass) -->
+    <div class="cta-container">
+      <h3>Join the Playground</h3>
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" placeholder="you@example.com" />
+
+      <label for="solanaAddress">Solana Address:</label>
+      <input type="text" id="solanaAddress" placeholder="Enter your Solana wallet address" />
+
+      <button type="submit" onclick="alert('Thanks for joining!');">
+        Sign Up
+      </button>
+    </div>
+
     <div class="hero-content">
-      <!-- CHANGES HERE: Add the $PPLAY logo in the hero section, front and center -->
-      <img src="images/pplay_logo.png" alt="$PPLAY Logo" class="hero-logo">
+      <img src="images/pplay_logo.png" alt="$PPLAY Logo" class="hero-logo" />
       <h2>Where Degens Come to Play</h2>
       <p>Immortalize your legendary wins and epic losses on the blockchain.</p>
-      <button class="btn" onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' });">
-        Join the Playground
-      </button>
+    </div>
+  </section>
+
+  <!-- NFT Minting Section (Below Hero) -->
+  <section id="mint">
+    <div class="container">
+      <h2 class="section-title">Mint Your Gains/Losses NFT</h2>
+      <p>Drag and drop a screenshot of your gains or losses below to mint it on Solana!</p>
+      <div class="dropzone" onclick="document.getElementById('fileInput').click()">
+        <p>Drag & drop an image here, or click to select a file</p>
+        <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+      </div>
+      <button class="btn" onclick="mintNFT()">Mint NFT</button>
     </div>
   </section>
 
@@ -212,10 +369,10 @@
   <section id="about">
     <div class="container">
       <h2 class="section-title">About $PPLAY</h2>
-      <img src="images/bitcoin_logo.png" alt="Bitcoin Logo" class="about-image">
+      <img src="images/bitcoin_logo.png" alt="Bitcoin Logo" class="about-image" />
       <p>
-        $PPLAY is the first decentralized platform dedicated to trading culture. We merge the adrenaline 
-        of high-stakes trading and betting with blockchain technology to immortalize every trade, win, 
+        $PPLAY is the first decentralized platform dedicated to trading culture. We merge the adrenaline
+        of high-stakes trading and betting with blockchain technology to immortalize every trade, win,
         and loss as a unique NFT.
       </p>
     </div>
@@ -285,7 +442,7 @@
     <div class="container">
       <h2 class="section-title">Meet the Team</h2>
       <p>
-        Our core team comprises experienced degens, blockchain developers, community managers, 
+        Our core team comprises experienced degens, blockchain developers, community managers,
         and marketing specialists. We’re here to revolutionize trading culture.
       </p>
     </div>
@@ -297,8 +454,8 @@
       <h2 class="section-title">Join the Community</h2>
       <p>Connect with us on our social channels and stay updated on the latest developments, competitions, and NFT drops.</p>
       <p>
-        <a href="https://discord.com" target="_blank">Discord</a> | 
-        <a href="https://telegram.org" target="_blank">Telegram</a> | 
+        <a href="https://discord.com" target="_blank">Discord</a> |
+        <a href="https://telegram.org" target="_blank">Telegram</a> |
         <a href="https://twitter.com" target="_blank">Twitter</a>
       </p>
     </div>
@@ -308,5 +465,19 @@
   <footer>
     <p>&copy; 2024 $PPLAY. All rights reserved.</p>
   </footer>
+
+  <!-- Placeholder JS for NFT Minting -->
+  <script>
+    // Basic example of a "mint" function (not real blockchain logic)
+    function mintNFT() {
+      const fileInput = document.getElementById('fileInput');
+      if (!fileInput.files.length) {
+        alert('Please select an image to mint.');
+        return;
+      }
+      // In a real app, you'd integrate with Solana libraries (e.g. Metaplex, Candy Machine, etc.)
+      alert('NFT minting placeholder! Implement Solana logic here.');
+    }
+  </script>
 </body>
 </html>
