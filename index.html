@@ -2,36 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>$PPLAY: Parlay Playground</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$PPLAY: Parlay Playground - Where Degens Come to Play</title>
+  <meta name="description" content="Immortalize your legendary wins and epic losses on the blockchain with $PPLAY" />
+  <meta property="og:title" content="$PPLAY: Parlay Playground" />
+  <meta property="og:description" content="Where Degens Come to Play - Mint your trades as NFTs" />
+  <meta property="og:image" content="images/pplay_logo.png" />
+
+  <!-- AOS (Animate On Scroll) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <style>
+    :root {
+      --primary-color: #e50914;
+      --secondary-color: #ff3366;
+      /* New neon pink accent for a gaming vibe */
+      --accent-pink: #ff0099;
+
+      --bg-color: #f4f4f4;
+      --text-color: #333;
+      --card-bg: #ffffff;
+    }
+
     /* Reset & Base */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background: #f4f4f4;
-      scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+      background: var(--bg-color);
+      color: var(--text-color);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
     }
     a {
-      color: #e50914;
+      color: var(--primary-color);
       text-decoration: none;
       transition: color 0.2s ease;
     }
     a:hover {
-      color: #ff3366;
+      color: var(--secondary-color);
     }
 
-    /* Header */
+    /* Fixed Header */
     header {
-      background: #222;
-      color: #fff;
-      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(34, 34, 34, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 1rem 20px;
     }
     .header-container {
       max-width: 1200px;
@@ -39,31 +69,41 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
     }
     .logo-title h1 {
       font-size: 1.8em;
-      transition: color 0.2s ease;
-    }
-    .logo-title h1:hover {
-      color: #ff3366;
+      color: #fff;
+      cursor: pointer;
     }
     nav ul {
-      list-style: none;
       display: flex;
-    }
-    nav ul li {
-      margin: 0 15px;
+      list-style: none;
+      gap: 1.5rem;
     }
     nav ul li a {
       color: #fff;
       font-size: 1em;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover::after {
+      width: 100%;
     }
 
-    /* Hero Section */
+    /* Hero Section with Poker Background */
     #hero {
       position: relative;
-      min-height: 70vh;
+      height: 100vh;
       background: url('images/pplay_poker.png') no-repeat center center/cover;
       display: flex;
       align-items: center;
@@ -72,6 +112,7 @@
       color: #fff;
     }
     #hero::before {
+      /* Dark overlay for readability */
       content: "";
       position: absolute;
       top: 0;
@@ -79,36 +120,51 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.4);
-      z-index: 1;
+      z-index: 0;
     }
+
     .hero-content {
       position: relative;
       z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
     }
     .hero-logo {
       display: block;
-      margin-bottom: 5px;
-      width: 950px;
-      height: auto;
+      width: 400px;
+      margin: 0 auto 1rem; /* Ensures the logo is centered horizontally */
+      opacity: 0.9;
     }
+    /* Hero Headline & Subtext in neon pink */
     .hero-content h2 {
-      color: #ff0099; /* Pink accent */
-      font-size: 2.2em;
-      margin: 10px 0 5px;
+      font-size: 2.5em;
+      color: var(--accent-pink);
+      text-align: center;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
     .hero-content p {
-      color: #ff0099;
-      margin: 0 0 20px;
       font-size: 1.2em;
+      color: var(--accent-pink);
+      margin-bottom: 2rem;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
+    .btn-modern {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .btn-modern:hover {
+      background: var(--secondary-color);
+      transform: scale(1.05);
+    }
 
-    /* CTA Form (Join the Playground) - Frosted Glass */
+    /* Floating CTA Form (Join the Playground) */
     .cta-container {
       position: absolute;
       top: 20%;
@@ -118,120 +174,115 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(8px) saturate(180%);
       -webkit-backdrop-filter: blur(8px) saturate(180%);
-      padding: 20px;
+      padding: 1.5rem;
       border-radius: 15px;
       box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
       width: 300px;
-      transition: all 0.3s ease;
-    }
-    .cta-container:hover {
-      box-shadow: 0 12px 48px rgba(31, 38, 135, 0.5);
+      text-align: left;
     }
     .cta-container h3 {
-      color: #e50914;
-      margin-bottom: 10px;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
       text-align: center;
+      font-size: 1.3em;
     }
     .cta-container label {
-      display: block;
-      margin-bottom: 5px;
-      color: #333;
       font-weight: bold;
+      margin-bottom: 0.3rem;
+      display: block;
+      font-size: 0.9em;
     }
     .cta-container input[type="email"],
     .cta-container input[type="text"] {
       width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
+      padding: 0.6rem;
+      margin-bottom: 0.8rem;
       border: 1px solid #ccc;
       border-radius: 4px;
+      font-size: 0.9em;
     }
     .cta-container button {
       width: 100%;
-      padding: 10px;
-      background: #e50914;
-      color: #fff;
+      padding: 0.7rem;
+      background: var(--primary-color);
       border: none;
       border-radius: 4px;
-      cursor: pointer;
+      color: #fff;
       font-size: 1em;
-      transition: transform 0.2s ease, background 0.2s ease;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
     .cta-container button:hover {
-      background: #ff3366;
+      background: var(--secondary-color);
       transform: scale(1.03);
     }
 
-    /* NFT Mint Section */
+    /* NFT Minting Section */
     #mint {
-      background: #fff;
-      padding: 60px 20px;
+      background: var(--card-bg);
+      padding: 4rem 1rem;
       text-align: center;
     }
     #mint .container {
       max-width: 800px;
       margin: 0 auto;
     }
+    /* Section Titles in the same neon pink */
     #mint .section-title {
-      margin-bottom: 30px;
-      color: #e50914;
       font-size: 2em;
+      color: var(--accent-pink);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    #mint .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--accent-pink);
+      border-radius: 2px;
     }
     #mint p {
-      margin-bottom: 20px;
       font-size: 1.1em;
-      color: #444;
+      color: #555;
+      margin-bottom: 1.5rem;
     }
     #mint .dropzone {
-      width: 100%;
       max-width: 400px;
-      margin: 0 auto 20px;
-      padding: 40px;
+      margin: 0 auto 1rem;
+      padding: 2rem;
       border: 2px dashed #ccc;
       border-radius: 10px;
-      text-align: center;
       background: #f9f9f9;
       cursor: pointer;
       transition: background 0.2s ease, border-color 0.2s ease;
     }
     #mint .dropzone:hover {
       background: #fff;
-      border-color: #e50914;
+      border-color: var(--primary-color);
     }
     #mint .dropzone p {
+      font-size: 1em;
       color: #666;
-      font-size: 1em;
-    }
-    #mint .btn {
-      display: inline-block;
-      margin-top: 20px;
-      background: #e50914;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-    #mint .btn:hover {
-      background: #ff3366;
-      transform: scale(1.05);
     }
 
-    /* Sections (About, Features, etc.) */
+    /* Standard Sections (About, Features, Roadmap, Tokenomics, Team, Community) */
     section {
-      padding: 60px 20px;
+      padding: 4rem 1rem;
+      text-align: center;
     }
     .container {
       max-width: 1200px;
-      margin: auto;
+      margin: 0 auto;
     }
+    /* All section titles now share the neon pink color */
     .section-title {
-      text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 2rem;
       font-size: 2em;
-      color: #222;
+      color: var(--accent-pink);
       position: relative;
     }
     .section-title::after {
@@ -242,36 +293,38 @@
       transform: translateX(-50%);
       width: 60px;
       height: 3px;
-      background: #e50914;
+      background: var(--accent-pink);
       border-radius: 2px;
     }
-    .about-image {
+    .about-logo {
       display: block;
-      margin: 20px auto;
-      max-width: 200px;
+      margin: 0 auto 1rem;
+      width: 900px; /* Adjust as you wish */
+      height: auto;
     }
 
-    /* Features & Roadmap Layouts */
+    /* Grid for Features, Roadmap, etc. */
     .grid {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      gap: 1.5rem;
+      justify-content: center;
     }
     .grid-item {
-      background: #fff;
-      padding: 20px;
-      margin: 10px;
-      border-radius: 5px;
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 15px;
       flex: 1 1 300px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       transition: transform 0.2s ease;
     }
     .grid-item:hover {
-      transform: scale(1.02);
+      transform: scale(1.03);
     }
     ul {
       list-style: disc inside;
-      margin-top: 20px;
+      margin-top: 1rem;
+      text-align: center;
     }
 
     /* Footer */
@@ -279,40 +332,38 @@
       background: #222;
       color: #fff;
       text-align: center;
-      padding: 20px 0;
+      padding: 1.5rem 1rem;
     }
     footer p {
-      margin: 10px 0;
+      font-size: 0.9em;
     }
 
-    /* Responsive */
+    /* Responsive Adjustments */
     @media (max-width: 768px) {
+      .cta-container {
+        position: static;
+        margin: 1rem auto;
+        width: 90%;
+      }
       .hero-content h2 {
         font-size: 1.8em;
       }
       .hero-content p {
         font-size: 1em;
       }
-      .cta-container {
-        position: static; /* Remove absolute for small screens */
-        margin: 20px auto 0;
-        right: auto;
-        top: auto;
-        width: 90%;
-      }
-      .cta-container:hover {
-        box-shadow: none;
+      .hero-logo {
+        width: 300px; /* smaller on mobile if desired */
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header and Navigation -->
+  <!-- Header -->
   <header>
     <div class="header-container">
       <div class="logo-title">
-        <h1>Parlay Playground</h1>
+        <h1 onclick="scrollToTop()">$PPLAY</h1>
       </div>
       <nav>
         <ul>
@@ -330,98 +381,89 @@
   </header>
 
   <!-- Hero Section -->
-  <section id="hero">
-    <!-- CTA Form on the Right (Frosted Glass) -->
-    <div class="cta-container">
-      <h3>Join the Playground</h3>
-      <label for="email">Email Address:</label>
-      <input type="email" id="email" placeholder="you@example.com" />
-
-      <label for="solanaAddress">Solana Address:</label>
-      <input type="text" id="solanaAddress" placeholder="Enter your Solana wallet address" />
-
-      <button type="submit" onclick="alert('Thanks for joining!');">
-        Sign Up
-      </button>
-    </div>
-
+  <section id="hero" data-aos="fade-up">
     <div class="hero-content">
       <img src="images/pplay_logo.png" alt="$PPLAY Logo" class="hero-logo" />
       <h2>Where Degens Come to Play</h2>
       <p>Immortalize your legendary wins and epic losses on the blockchain.</p>
+      <button class="btn-modern" onclick="scrollToMint()">Start Minting</button>
+    </div>
+    <!-- Floating CTA Form -->
+    <div class="cta-container" data-aos="fade-left">
+      <h3>Join the Playground</h3>
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" placeholder="you@example.com" />
+      <label for="solanaAddress">Solana Address:</label>
+      <input type="text" id="solanaAddress" placeholder="Your wallet address" />
+      <button onclick="alert('Thanks for joining!')">Sign Up</button>
     </div>
   </section>
 
-  <!-- NFT Minting Section (Below Hero) -->
-  <section id="mint">
+  <!-- NFT Minting Section -->
+  <section id="mint" data-aos="fade-up">
     <div class="container">
       <h2 class="section-title">Mint Your Gains/Losses NFT</h2>
-      <p>Drag and drop a screenshot of your gains or losses below to mint it on Solana!</p>
+      <p>Drag & drop your screenshot or click below to select an image, then mint on Solana!</p>
       <div class="dropzone" onclick="document.getElementById('fileInput').click()">
-        <p>Drag & drop an image here, or click to select a file</p>
-        <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+        <p>Drag & drop an image here, or click to select</p>
+        <input type="file" id="fileInput" accept="image/*" style="display:none;" />
       </div>
-      <button class="btn" onclick="mintNFT()">Mint NFT</button>
+      <button class="btn-modern" onclick="handleMint()">Mint NFT</button>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section id="about">
+  <!-- About Section (Using Larger $PPLAY Logo) -->
+  <section id="about" data-aos="fade-up">
     <div class="container">
-      <h2 class="section-title">About $PPLAY</h2>
-      <img src="images/bitcoin_logo.png" alt="Bitcoin Logo" class="about-image" />
-      <p>
-        $PPLAY is the first decentralized platform dedicated to trading culture. We merge the adrenaline
-        of high-stakes trading and betting with blockchain technology to immortalize every trade, win,
-        and loss as a unique NFT.
-      </p>
+      <img src="images/pplay_logo.png" alt="$PPLAY Logo" class="about-logo" />
+      <p>$PPLAY is the first decentralized platform dedicated to trading culture—where every epic win or devastating loss is immortalized as a unique NFT on the Solana blockchain.</p>
     </div>
   </section>
 
   <!-- Features Section -->
-  <section id="features">
+  <section id="features" data-aos="fade-up">
     <div class="container">
       <h2 class="section-title">Core Features</h2>
       <div class="grid">
         <div class="grid-item">
           <h3>Immortalized Moments</h3>
-          <p>Mint your trading history as unique NFTs with distinct rarity tiers. These digital artifacts capture your highs and lows forever.</p>
+          <p>Capture and mint your trading history with unique rarity tiers.</p>
         </div>
         <div class="grid-item">
           <h3>Decentralized Betting</h3>
-          <p>Participate in peer-to-peer betting pools and multi-leg parlays. Bet on outcomes, double your stakes, or go all in—all on a decentralized protocol.</p>
+          <p>Engage in peer-to-peer betting and parlay your trades.</p>
         </div>
         <div class="grid-item">
           <h3>Community Governance</h3>
-          <p>Use your $PPLAY tokens to vote on platform features, competitions, and policy changes. Shape the future of the playground together.</p>
+          <p>Shape the future of $PPLAY with your vote and insights.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Roadmap Section -->
-  <section id="roadmap">
+  <section id="roadmap" data-aos="fade-up">
     <div class="container">
       <h2 class="section-title">Roadmap</h2>
       <div class="grid">
         <div class="grid-item">
           <h3>Phase 1: Launch (Q2 2024)</h3>
-          <p>Token launch, basic platform deployment, community building, and initial NFT minting.</p>
+          <p>Token launch, platform deployment, and initial NFT minting.</p>
         </div>
         <div class="grid-item">
           <h3>Phase 2: Expansion (Q3 2024)</h3>
-          <p>Launch of decentralized betting, enhanced NFT features, partnership development, and community governance integration.</p>
+          <p>Decentralized betting, enhanced NFT features, and governance integration.</p>
         </div>
         <div class="grid-item">
           <h3>Phase 3: Evolution (Q4 2024)</h3>
-          <p>Cross-chain integration, advanced betting options, mobile app development, and institutional partnerships.</p>
+          <p>Cross-chain integration, mobile app development, and institutional partnerships.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Tokenomics Section -->
-  <section id="tokenomics">
+  <section id="tokenomics" data-aos="fade-up">
     <div class="container">
       <h2 class="section-title">Tokenomics</h2>
       <p>Total Supply: 1,000,000,000 $PPLAY</p>
@@ -433,26 +475,23 @@
         <li>15% Team (vested)</li>
         <li>5% Reserve</li>
       </ul>
-      <p>$PPLAY tokens fuel NFT minting, pay for platform fees, enable governance, and power staking rewards.</p>
+      <p>$PPLAY tokens power NFT minting, platform fees, governance, and staking rewards.</p>
     </div>
   </section>
 
   <!-- Team Section -->
-  <section id="team">
+  <section id="team" data-aos="fade-up">
     <div class="container">
       <h2 class="section-title">Meet the Team</h2>
-      <p>
-        Our core team comprises experienced degens, blockchain developers, community managers,
-        and marketing specialists. We’re here to revolutionize trading culture.
-      </p>
+      <p>Our team of seasoned traders, blockchain developers, and marketing specialists is here to revolutionize trading culture.</p>
     </div>
   </section>
 
   <!-- Community Section -->
-  <section id="community">
+  <section id="community" data-aos="fade-up">
     <div class="container">
       <h2 class="section-title">Join the Community</h2>
-      <p>Connect with us on our social channels and stay updated on the latest developments, competitions, and NFT drops.</p>
+      <p>Connect with us on Discord, Telegram, and Twitter for the latest updates, competitions, and NFT drops.</p>
       <p>
         <a href="https://discord.com" target="_blank">Discord</a> |
         <a href="https://telegram.org" target="_blank">Telegram</a> |
@@ -466,17 +505,28 @@
     <p>&copy; 2024 $PPLAY. All rights reserved.</p>
   </footer>
 
-  <!-- Placeholder JS for NFT Minting -->
+  <!-- JavaScript -->
   <script>
-    // Basic example of a "mint" function (not real blockchain logic)
-    function mintNFT() {
+    // Initialize AOS
+    AOS.init({ duration: 1000, once: true });
+
+    // Scroll Functions
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function scrollToMint() {
+      document.getElementById('mint').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // NFT Minting Placeholder Function with Confetti
+    function handleMint() {
       const fileInput = document.getElementById('fileInput');
       if (!fileInput.files.length) {
         alert('Please select an image to mint.');
         return;
       }
-      // In a real app, you'd integrate with Solana libraries (e.g. Metaplex, Candy Machine, etc.)
-      alert('NFT minting placeholder! Implement Solana logic here.');
+      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+      alert('NFT minting placeholder! Integrate with Solana logic here.');
     }
   </script>
 </body>
