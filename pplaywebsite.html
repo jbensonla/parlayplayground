@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$PPLAY: Parlay Playground</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f4f4f4;
+    }
+    a {
+      color: #e50914;
+      text-decoration: none;
+    }
+    header, footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+    header h1 {
+      margin-bottom: 10px;
+      font-size: 2.5em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: #fff;
+      font-size: 1em;
+    }
+    section {
+      padding: 60px 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2em;
+      color: #222;
+    }
+    /* Hero Section */
+    #hero {
+      background: url('hero-image.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+    #hero h2 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    #hero p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    .btn {
+      padding: 15px 30px;
+      background: #e50914;
+      color: #fff;
+      border: none;
+      font-size: 1.1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    /* Features & Roadmap Layouts */
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .grid-item {
+      background: #fff;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 5px;
+      flex: 1 1 300px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    ul {
+      list-style: disc inside;
+      margin-top: 20px;
+    }
+    footer p {
+      margin: 10px 0;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .grid {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header and Navigation -->
+  <header>
+    <div class="container">
+      <h1>$PPLAY: Parlay Playground</h1>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#roadmap">Roadmap</a></li>
+          <li><a href="#tokenomics">Tokenomics</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#community">Community</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="container">
+      <h2>Where Degens Come to Play</h2>
+      <p>Immortalize your legendary wins and epic losses on the blockchain.</p>
+      <button class="btn" onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' });">Join the Playground</button>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About $PPLAY</h2>
+      <p>$PPLAY is the first decentralized platform dedicated to trading culture. We merge the adrenaline of high-stakes trading and betting with blockchain technology to immortalize every trade, win, and loss as a unique NFT.</p>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features">
+    <div class="container">
+      <h2 class="section-title">Core Features</h2>
+      <div class="grid">
+        <div class="grid-item">
+          <h3>Immortalized Moments</h3>
+          <p>Mint your trading history as unique NFTs with distinct rarity tiers. These digital artifacts capture your highs and lows forever.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Decentralized Betting</h3>
+          <p>Participate in peer-to-peer betting pools and multi-leg parlays. Bet on outcomes, double your stakes, or go all in—all on a decentralized protocol.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Community Governance</h3>
+          <p>Use your $PPLAY tokens to vote on platform features, competitions, and policy changes. Shape the future of the playground together.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap Section -->
+  <section id="roadmap">
+    <div class="container">
+      <h2 class="section-title">Roadmap</h2>
+      <div class="grid">
+        <div class="grid-item">
+          <h3>Phase 1: Launch (Q2 2024)</h3>
+          <p>Token launch, basic platform deployment, community building, and initial NFT minting.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Phase 2: Expansion (Q3 2024)</h3>
+          <p>Launch of decentralized betting, enhanced NFT features, partnership development, and community governance integration.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Phase 3: Evolution (Q4 2024)</h3>
+          <p>Cross-chain integration, advanced betting options, mobile app development, and institutional partnerships.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tokenomics Section -->
+  <section id="tokenomics">
+    <div class="container">
+      <h2 class="section-title">Tokenomics</h2>
+      <p>Total Supply: 1,000,000,000 $PPLAY</p>
+      <ul>
+        <li>25% Community/Trading Rewards</li>
+        <li>20% Liquidity Pool (locked 1 year)</li>
+        <li>20% Development</li>
+        <li>15% Marketing</li>
+        <li>15% Team (vested)</li>
+        <li>5% Reserve</li>
+      </ul>
+      <p>$PPLAY tokens fuel NFT minting, pay for platform fees, enable governance, and power staking rewards.</p>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team">
+    <div class="container">
+      <h2 class="section-title">Meet the Team</h2>
+      <p>Our core team comprises experienced degens, blockchain developers, community managers, and marketing specialists. We’re here to revolutionize trading culture.</p>
+    </div>
+  </section>
+
+  <!-- Community Section -->
+  <section id="community">
+    <div class="container">
+      <h2 class="section-title">Join the Community</h2>
+      <p>Connect with us on our social channels and stay updated on the latest developments, competitions, and NFT drops.</p>
+      <p>
+        <a href="https://discord.com" target="_blank">Discord</a> | 
+        <a href="https://telegram.org" target="_blank">Telegram</a> | 
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 $PPLAY. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
