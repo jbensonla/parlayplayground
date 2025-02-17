@@ -39,10 +39,8 @@
       display: flex;
       align-items: center;
     }
-    .logo-title img {
-      max-height: 50px; /* Adjust logo size here */
-      margin-right: 15px;
-    }
+    /* CHANGES HERE: Removed the logo image from the header. 
+       If you want to keep it, just comment out the <img> line instead. */
     .logo-title h1 {
       font-size: 1.8em;
     }
@@ -112,6 +110,15 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
+    /* CHANGES HERE: Add a larger hero-logo class for the $PPLAY logo in the hero */
+    .hero-logo {
+      display: block;       /* Ensures it’s treated like a block element */
+      margin: 0 auto 20px;  /* Center horizontally (auto) and add bottom space */
+      width: 200px;         /* Increase or decrease as needed */
+      height: auto;         /* Keep aspect ratio */
+    }
+
     /* Features & Roadmap Layouts */
     .grid {
       display: flex;
@@ -159,6 +166,9 @@
       #hero p {
         font-size: 1em;
       }
+      .hero-logo {
+        width: 150px; /* Slightly smaller on mobile, if desired */
+      }
     }
   </style>
 </head>
@@ -167,8 +177,8 @@
   <header>
     <div class="header-container">
       <div class="logo-title">
-        <!-- New Pink $PPLAY Logo -->
-        <img src="images/pplay_logo.png" alt="$PPLAY Logo">
+        <!-- Logo removed or commented out here. Only text remains. -->
+        <!-- <img src="images/pplay_logo.png" alt="$PPLAY Logo"> -->
         <h1>Parlay Playground</h1>
       </div>
       <nav>
@@ -188,6 +198,8 @@
   <!-- Hero Section -->
   <section id="hero">
     <div class="hero-content">
+      <!-- CHANGES HERE: Add the $PPLAY logo in the hero section, front and center -->
+      <img src="images/pplay_logo.png" alt="$PPLAY Logo" class="hero-logo">
       <h2>Where Degens Come to Play</h2>
       <p>Immortalize your legendary wins and epic losses on the blockchain.</p>
       <button class="btn" onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' });">
