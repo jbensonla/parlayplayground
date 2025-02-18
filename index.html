@@ -133,7 +133,7 @@
     .hero-logo {
       display: block;
       width: 400px;
-      margin: 0 auto 1rem; /* Ensures the logo is centered horizontally */
+      margin: 0 auto 1rem;
       opacity: 0.9;
     }
     /* Hero Headline & Subtext in neon pink */
@@ -164,7 +164,7 @@
       transform: scale(1.05);
     }
 
-    /* Floating CTA Form (Join the Playground) */
+    /* Floating CTA Form (Join the Playground) using Netlify Forms */
     .cta-container {
       position: absolute;
       top: 20%;
@@ -227,7 +227,7 @@
       max-width: 800px;
       margin: 0 auto;
     }
-    /* Section Titles in the same neon pink */
+    /* Section Titles in neon pink */
     #mint .section-title {
       font-size: 2em;
       color: var(--accent-pink);
@@ -269,7 +269,7 @@
       color: #666;
     }
 
-    /* Standard Sections (About, Features, Roadmap, Tokenomics, Team, Community) */
+    /* Standard Sections */
     section {
       padding: 4rem 1rem;
       text-align: center;
@@ -278,7 +278,7 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    /* All section titles now share the neon pink color */
+    /* All section titles in neon pink */
     .section-title {
       margin-bottom: 2rem;
       font-size: 2em;
@@ -299,7 +299,7 @@
     .about-logo {
       display: block;
       margin: 0 auto 1rem;
-      width: 900px; /* Adjust as you wish */
+      width: 900px;
       height: auto;
     }
 
@@ -352,7 +352,7 @@
         font-size: 1em;
       }
       .hero-logo {
-        width: 300px; /* smaller on mobile if desired */
+        width: 300px;
       }
     }
   </style>
@@ -388,14 +388,18 @@
       <p>Immortalize your legendary wins and epic losses on the blockchain.</p>
       <button class="btn-modern" onclick="scrollToMint()">Start Minting</button>
     </div>
-    <!-- Floating CTA Form -->
+    <!-- Floating CTA Form with Netlify Form Handling -->
     <div class="cta-container" data-aos="fade-left">
-      <h3>Register for Air Drop</h3>
-      <label for="email">Email Address:</label>
-      <input type="email" id="email" placeholder="you@example.com" />
-      <label for="solanaAddress">Solana Address:</label>
-      <input type="text" id="solanaAddress" placeholder="Your wallet address" />
-      <button onclick="alert('Thanks for joining!')">Sign Up</button>
+      <form name="airdrop" method="POST" data-netlify="true">
+        <!-- Hidden input required by Netlify -->
+        <input type="hidden" name="form-name" value="airdrop" />
+        <h3>Sign up for Air Drop - 10,000 $PPLAY Coins and 2,000 $PPLAY for referencing friends</h3>
+        <label for="email">Email Address:</label>
+        <input type="email" name="email" id="email" placeholder="you@example.com" required />
+        <label for="solanaAddress">Solana Address:</label>
+        <input type="text" name="solanaAddress" id="solanaAddress" placeholder="Your wallet address" required />
+        <button type="submit">Sign Up</button>
+      </form>
     </div>
   </section>
 
