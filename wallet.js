@@ -1,3 +1,5 @@
+"use strict";
+
 // wallet.js
 
 // Global variable to store the connected wallet provider
@@ -15,7 +17,7 @@ async function connectWallet() {
         const resp = await provider.connect();
         console.log("Wallet connected:", resp.publicKey.toString());
         
-        // Update global provider
+        // Update the global provider
         window.solanaProvider = provider;
         
         // Update UI
@@ -25,9 +27,7 @@ async function connectWallet() {
           connectBtn.disabled = true;
         }
 
-        // Show success message
         alert(`Connected to wallet: ${resp.publicKey.toString()}`);
-        
         return provider;
       } catch (err) {
         console.error("Wallet connection error:", err);
@@ -51,6 +51,6 @@ function isWalletConnected() {
   return !!window.solanaProvider;
 }
 
-// Make functions available globally
+// Make the wallet functions globally available
 window.connectWallet = connectWallet;
 window.isWalletConnected = isWalletConnected;
