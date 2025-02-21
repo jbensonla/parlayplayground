@@ -857,6 +857,175 @@
     .form-submit-button:hover {
         background: rgba(255, 20, 147, 0.9) !important;
     }
+
+    /* Add this meta tag in your head section if not already present */
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    /* Base Mobile-First Styles */
+    :root {
+        --container-padding: 20px;
+    }
+
+    .container {
+        padding: 0 var(--container-padding);
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Navigation Responsive Styling */
+    @media (max-width: 768px) {
+        nav {
+            padding: 10px var(--container-padding);
+        }
+
+        nav .logo {
+            font-size: 1.5em;
+        }
+
+        nav .nav-links {
+            display: none; /* We'll need to add a mobile menu */
+        }
+    }
+
+    /* Hero Section Responsive */
+    @media (max-width: 768px) {
+        #hero {
+            padding: 60px 0;
+        }
+
+        #hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        #hero p {
+            font-size: 1.1em;
+        }
+
+        .cta-container {
+            width: 90%;
+            padding: 20px;
+        }
+
+        .cta-container input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+
+    /* Tokenomics Mobile Styling */
+    @media (max-width: 768px) {
+        .allocation-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .total-supply {
+            padding: 1.5rem;
+        }
+
+        .allocation-item {
+            padding: 1rem;
+        }
+    }
+
+    /* Roadmap Mobile Styling */
+    @media (max-width: 768px) {
+        .roadmap-grid {
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .roadmap-item {
+            width: 100%;
+            margin: 0;
+        }
+
+        .roadmap-item::after {
+            display: none;
+        }
+    }
+
+    /* Team Section Mobile */
+    @media (max-width: 768px) {
+        .join-team-banner .positions {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+
+    /* Form Mobile Styling */
+    @media (max-width: 768px) {
+        .job-application-form {
+            width: 95%;
+            padding: 1.5rem;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px;
+        }
+    }
+
+    /* NFT Carousel Mobile */
+    @media (max-width: 768px) {
+        .carousel-container {
+            padding: 0 var(--container-padding);
+        }
+
+        .carousel-item {
+            width: 300px;
+            margin-right: 15px;
+        }
+
+        .carousel-item img {
+            height: 250px;
+        }
+    }
+
+    /* General Mobile Typography */
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            font-size: 1em;
+            line-height: 1.6;
+        }
+    }
+
+    /* Mobile Navigation Menu */
+    .mobile-menu-button {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        .mobile-menu-button {
+            display: block;
+        }
+
+        .nav-links.mobile-active {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: var(--background-color);
+            padding: 20px;
+            gap: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+    }
   </style>
 </head>
 <body>
@@ -868,16 +1037,20 @@
         <h1 onclick="scrollToTop()">$PPLAY</h1>
       </div>
       <nav>
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#mint">Mint NFT</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#roadmap">Roadmap</a></li>
-          <li><a href="#tokenomics">Tokenomics</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#community">Community</a></li>
-        </ul>
+        <div class="logo">$PPLAY</div>
+        <button class="mobile-menu-button" onclick="toggleMobileMenu()">☰</button>
+        <div class="nav-links">
+          <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#mint">Mint NFT</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#tokenomics">Tokenomics</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#community">Community</a></li>
+          </ul>
+        </div>
       </nav>
       <!-- Wallet Connect Button -->
       <div class="wallet-connect">
@@ -1412,6 +1585,29 @@
                 }
             });
         }
+    });
+  </script>
+
+  <!-- Mobile Menu Toggle -->
+  <script>
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('mobile-active');
+    }
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.remove('mobile-active');
+        });
+    });
+
+    // Close mobile menu when scrolling
+    window.addEventListener('scroll', () => {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.remove('mobile-active');
     });
   </script>
 </body>
