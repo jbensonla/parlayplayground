@@ -1026,6 +1026,147 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
     }
+
+    /* Force proper viewport behavior */
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+
+    /* Container adjustments */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    /* Logo and Navigation fixes */
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        width: 100%;
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background: var(--background-color);
+    }
+
+    nav .logo {
+        font-size: 24px;
+        margin: 0;
+    }
+
+    /* Hero Section Mobile Fixes */
+    #hero {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        padding: 80px 20px 40px;
+        box-sizing: border-box;
+    }
+
+    /* Airdrop Form Container */
+    .cta-container {
+        width: 90%;
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        box-sizing: border-box;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+        /* Mobile-specific adjustments */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: 2em;
+            margin: 0 0 15px;
+            width: 100%;
+        }
+
+        #hero p {
+            font-size: 1em;
+            margin: 0 0 20px;
+            width: 100%;
+        }
+
+        .cta-container {
+            width: 85%;
+            padding: 15px;
+            margin: 20px auto;
+        }
+
+        .cta-container input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Fix button sizing */
+        .btn-modern {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px auto;
+            display: block;
+        }
+
+        /* Navigation menu button positioning */
+        .mobile-menu-button {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Prevent horizontal scroll */
+        .section {
+            width: 100vw;
+            max-width: 100%;
+            overflow-x: hidden;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+    }
+
+    /* Additional Mobile Safeguards */
+    @media (max-width: 480px) {
+        body {
+            min-width: 320px;
+        }
+
+        .container {
+            min-width: 320px;
+        }
+
+        #hero h1 {
+            font-size: 1.8em;
+        }
+
+        .cta-container {
+            width: 95%;
+            margin: 10px auto;
+        }
+    }
   </style>
 </head>
 <body>
