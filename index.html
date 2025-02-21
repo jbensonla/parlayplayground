@@ -9,6 +9,7 @@
   <meta property="og:description" content="Where Degens Come to Play - Mint your trades as NFTs" />
   <meta property="og:image" content="images/pplay_logo.png" />
 
+  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
   <!-- AOS (Animate On Scroll) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -22,12 +23,10 @@
       --secondary-color: #ff3366;
       /* New neon pink accent for a gaming vibe */
       --accent-pink: #ff0099;
-
       --bg-color: #f4f4f4;
       --text-color: #333;
       --card-bg: #ffffff;
     }
-
     /* Reset & Base */
     * {
       margin: 0;
@@ -50,7 +49,6 @@
     a:hover {
       color: var(--secondary-color);
     }
-
     /* Fixed Header */
     header {
       position: fixed;
@@ -99,7 +97,21 @@
     nav ul li a:hover::after {
       width: 100%;
     }
-
+    /* Wallet Connect Button Styling */
+    .wallet-connect button {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .wallet-connect button:hover {
+      background: var(--secondary-color);
+      transform: scale(1.05);
+    }
     /* Hero Section with Poker Background */
     #hero {
       position: relative;
@@ -112,7 +124,6 @@
       color: #fff;
     }
     #hero::before {
-      /* Dark overlay for readability */
       content: "";
       position: absolute;
       top: 0;
@@ -122,7 +133,6 @@
       background: rgba(0, 0, 0, 0.4);
       z-index: 0;
     }
-
     .hero-content {
       position: relative;
       z-index: 2;
@@ -136,11 +146,9 @@
       margin: 0 auto 1rem;
       opacity: 0.9;
     }
-    /* Hero Headline & Subtext in neon pink */
     .hero-content h2 {
       font-size: 2.5em;
       color: var(--accent-pink);
-      text-align: center;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
     .hero-content p {
@@ -163,8 +171,7 @@
       background: var(--secondary-color);
       transform: scale(1.05);
     }
-
-    /* Floating CTA Form (Join the Playground) using Netlify Forms */
+    /* Floating CTA Form */
     .cta-container {
       position: absolute;
       top: 20%;
@@ -216,7 +223,6 @@
       background: var(--secondary-color);
       transform: scale(1.03);
     }
-
     /* NFT Minting Section */
     #mint {
       background: var(--card-bg);
@@ -227,14 +233,13 @@
       max-width: 800px;
       margin: 0 auto;
     }
-    /* Section Titles in neon pink */
-    #mint .section-title {
+    .section-title {
+      margin-bottom: 2rem;
       font-size: 2em;
       color: var(--accent-pink);
-      margin-bottom: 1rem;
       position: relative;
     }
-    #mint .section-title::after {
+    .section-title::after {
       content: "";
       position: absolute;
       bottom: -10px;
@@ -268,8 +273,7 @@
       font-size: 1em;
       color: #666;
     }
-
-    /* Standard Sections */
+    /* Other Sections */
     section {
       padding: 4rem 1rem;
       text-align: center;
@@ -278,32 +282,12 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    /* All section titles in neon pink */
-    .section-title {
-      margin-bottom: 2rem;
-      font-size: 2em;
-      color: var(--accent-pink);
-      position: relative;
-    }
-    .section-title::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 3px;
-      background: var(--accent-pink);
-      border-radius: 2px;
-    }
     .about-logo {
       display: block;
       margin: 0 auto 1rem;
       width: 900px;
       height: auto;
     }
-
-    /* Grid for Features, Roadmap, etc. */
     .grid {
       display: flex;
       flex-wrap: wrap;
@@ -326,8 +310,6 @@
       margin-top: 1rem;
       text-align: center;
     }
-
-    /* Footer */
     footer {
       background: #222;
       color: #fff;
@@ -337,8 +319,6 @@
     footer p {
       font-size: 0.9em;
     }
-
-    /* Responsive Adjustments */
     @media (max-width: 768px) {
       .cta-container {
         position: static;
@@ -377,6 +357,10 @@
           <li><a href="#community">Community</a></li>
         </ul>
       </nav>
+      <!-- Wallet Connect Button -->
+      <div class="wallet-connect">
+        <button class="btn-modern" onclick="connectWallet()" id="connectWalletBtn">Connect Wallet</button>
+      </div>
     </div>
   </header>
 
@@ -388,10 +372,8 @@
       <p>Immortalize your legendary wins and epic losses on the blockchain.</p>
       <button class="btn-modern" onclick="scrollToMint()">Start Minting</button>
     </div>
-    <!-- Floating CTA Form with Netlify Form Handling -->
     <div class="cta-container" data-aos="fade-left">
       <form name="airdrop" method="POST" data-netlify="true">
-        <!-- Hidden input required by Netlify -->
         <input type="hidden" name="form-name" value="airdrop" />
         <h3>Register for AirDrop</h3>
         <label for="email">Email Address:</label>
@@ -408,15 +390,22 @@
     <div class="container">
       <h2 class="section-title">Mint Your Gains/Losses NFT</h2>
       <p>Drag & drop your screenshot or click below to select an image, then mint on Solana!</p>
-      <div class="dropzone" onclick="document.getElementById('fileInput').click()">
+      <div class="dropzone">
         <p>Drag & drop an image here, or click to select</p>
-        <input type="file" id="fileInput" accept="image/*" style="display:none;" />
+        <input 
+          type="file" 
+          id="fileInput" 
+          accept="image/*" 
+          style="display:none;" 
+          onclick="event.stopPropagation();"
+        />
       </div>
-      <button class="btn-modern" onclick="handleMint()">Mint NFT</button>
+      <!-- Mint button now calls our dynamic minting function -->
+      <button class="btn-modern" onclick="handleMintButtonClick()">Mint NFT</button>
     </div>
   </section>
 
-  <!-- About Section (Using Larger $PPLAY Logo) -->
+  <!-- About Section -->
   <section id="about" data-aos="fade-up">
     <div class="container">
       <img src="images/pplay_logo.png" alt="$PPLAY Logo" class="about-logo" />
@@ -513,7 +502,6 @@
   <script>
     // Initialize AOS
     AOS.init({ duration: 1000, once: true });
-
     // Scroll Functions
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -521,17 +509,13 @@
     function scrollToMint() {
       document.getElementById('mint').scrollIntoView({ behavior: 'smooth' });
     }
-
-    // NFT Minting Placeholder Function with Confetti
-    function handleMint() {
-      const fileInput = document.getElementById('fileInput');
-      if (!fileInput.files.length) {
-        alert('Please select an image to mint.');
-        return;
-      }
-      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-      alert('NFT minting placeholder! Integrate with Solana logic here.');
-    }
   </script>
+  <!-- Load Solana Web3.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.76.0/lib/index.iife.min.js"></script>
+  <!-- Load our wallet and upload scripts -->
+  <script src="wallet.js"></script>
+  <script src="upload.js"></script>
+  <!-- Load mint.js as an ES module to use import statements -->
+  <script src="mint.js"></script>
 </body>
 </html>
