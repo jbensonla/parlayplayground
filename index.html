@@ -1057,7 +1057,9 @@
         top: 0;
         left: 0;
         z-index: 1000;
-        background: var(--background-color);
+        background: rgba(18, 24, 38, 0.95); /* Semi-transparent background */
+        backdrop-filter: blur(5px);
+        height: 60px; /* Fixed height */
     }
 
     nav .logo {
@@ -1167,6 +1169,121 @@
             margin: 10px auto;
         }
     }
+
+    /* Fix header and navigation */
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        width: 100%;
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background: rgba(18, 24, 38, 0.95); /* Semi-transparent background */
+        backdrop-filter: blur(5px);
+        height: 60px; /* Fixed height */
+    }
+
+    /* Remove duplicate logo */
+    .background-logo {
+        display: none;
+    }
+
+    /* Fix Connect Wallet button positioning */
+    .connect-wallet-btn {
+        position: relative;
+        margin-left: 20px;
+        padding: 8px 16px;
+        height: auto;
+        font-size: 0.9em;
+    }
+
+    /* Main content adjustments */
+    main {
+        padding-top: 60px; /* Match header height */
+        min-height: calc(100vh - 60px);
+        position: relative;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+
+    /* Hero section fixes */
+    #hero {
+        padding-top: 80px; /* Increased padding to prevent overlap */
+        min-height: 100vh;
+        position: relative;
+        overflow: visible;
+    }
+
+    @media (max-width: 768px) {
+        /* Mobile-specific fixes */
+        body {
+            overflow-y: auto;
+            position: relative;
+        }
+
+        nav {
+            padding: 10px 15px;
+        }
+
+        nav .logo {
+            font-size: 20px; /* Slightly smaller on mobile */
+        }
+
+        .connect-wallet-btn {
+            font-size: 0.8em;
+            padding: 6px 12px;
+        }
+
+        #hero {
+            padding-top: 70px;
+            height: auto;
+            min-height: 100vh;
+        }
+
+        .cta-container {
+            position: relative;
+            margin-top: 30px;
+            width: 90%;
+            max-width: none;
+            transform: none;
+            left: auto;
+        }
+
+        /* Ensure content is scrollable */
+        main {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Fix mobile menu */
+        .nav-links.mobile-active {
+            position: fixed;
+            top: 60px; /* Match header height */
+            background: rgba(18, 24, 38, 0.95);
+            backdrop-filter: blur(5px);
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+    }
+
+    /* Additional scroll fixes */
+    section {
+        overflow: visible;
+        position: relative;
+        width: 100%;
+    }
+
+    .container {
+        position: relative;
+        overflow: visible;
+    }
   </style>
 </head>
 <body>
@@ -1179,24 +1296,11 @@
       </div>
       <nav>
         <div class="logo">$PPLAY</div>
-        <button class="mobile-menu-button" onclick="toggleMobileMenu()">☰</button>
-        <div class="nav-links">
-          <ul>
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#mint">Mint NFT</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#roadmap">Roadmap</a></li>
-            <li><a href="#tokenomics">Tokenomics</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#community">Community</a></li>
-          </ul>
+        <div class="nav-right">
+          <button class="connect-wallet-btn btn-modern">Connect Wallet</button>
+          <button class="mobile-menu-button" onclick="toggleMobileMenu()">☰</button>
         </div>
       </nav>
-      <!-- Wallet Connect Button -->
-      <div class="wallet-connect">
-        <button class="btn-modern" onclick="connectWallet()" id="connectWalletBtn">Connect Wallet</button>
-      </div>
     </div>
   </header>
 
