@@ -12,6 +12,7 @@ const PINATA_SECRET_KEY = "96f9ce3cecf5835ce1824ef5bd0315662c467b5c3ea4dff7d4e64
 function initDropZone() {
   const dropZone = document.querySelector(".dropzone");
   const fileInput = document.getElementById("fileInput");
+  const uploadButton = document.querySelector(".upload-btn");
 
   if (!dropZone || !fileInput) {
     console.error("Dropzone or file input elements not found");
@@ -32,20 +33,24 @@ function initDropZone() {
     }
   }
 
-  // Handle direct click on dropzone
-  dropZone.onclick = function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    fileInput.click();
-  };
+  // Add explicit click handler for upload button
+  if (uploadButton) {
+    uploadButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      fileInput.click();
+      console.log("Upload button clicked");
+    });
+  }
 
   // File input change handler
-  fileInput.onchange = function() {
+  fileInput.addEventListener('change', function(e) {
+    console.log("File input change event triggered");
     if (this.files && this.files[0]) {
       displayPreview(this.files[0]);
       console.log("File selected:", this.files[0]);
     }
-  };
+  });
 
   // Drag and drop event handlers
   dropZone.addEventListener("dragover", (e) => {

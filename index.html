@@ -857,6 +857,153 @@
     .form-submit-button:hover {
         background: rgba(255, 20, 147, 0.9) !important;
     }
+
+    /* Mobile-first container adjustments */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Trading leaderboard section */
+    .leaderboard-section {
+        width: 100%;
+        padding: 15px;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    /* PPLAY logo container */
+    .pplay-logo-container {
+        width: 100%;
+        padding: 20px 15px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .pplay-logo {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+
+    /* Mint section adjustments */
+    .mint-section {
+        width: 100%;
+        padding: 20px 15px;
+        background: white;
+        border-radius: 20px 20px 0 0;
+        margin-top: 20px;
+    }
+
+    .mint-container {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .dropzone {
+        border: 2px dashed #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        margin: 15px 0;
+    }
+
+    /* AirDrop form styling */
+    .airdrop-form {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 20px;
+        width: 90%;
+        max-width: 400px;
+        margin: 20px auto;
+    }
+
+    /* Button styling */
+    .btn-modern {
+        display: block;
+        width: 100%;
+        max-width: 200px;
+        margin: 15px auto;
+        padding: 12px 24px;
+        border-radius: 25px;
+    }
+
+    /* Media queries */
+    @media (max-width: 768px) {
+        .pplay-logo {
+            max-width: 300px;
+        }
+
+        .mint-section {
+            padding: 15px;
+        }
+
+        .airdrop-form {
+            width: 95%;
+            padding: 15px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .pplay-logo {
+            max-width: 250px;
+        }
+    }
+
+    /* Specifically targeting the secondary PPLAY logo below leaderboard */
+    .secondary-pplay-logo-container {
+        width: 100%;
+        max-width: 100vw;
+        padding: 20px 0;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+        margin-top: 20px; /* Space after leaderboard */
+    }
+
+    .secondary-pplay-logo {
+        width: auto;
+        height: auto;
+        max-width: min(400px, 90%);
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* Mobile adjustments for secondary logo only */
+    @media (max-width: 768px) {
+        .secondary-pplay-logo {
+            max-width: min(300px, 85%);
+        }
+    }
+
+    /* Style for the upload button */
+    .upload-btn {
+        background: #6C5DD3;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        cursor: pointer;
+        border: none;
+        margin: 10px auto;
+        display: block;
+    }
+
+    /* Restore original dropzone styling */
+    .dropzone {
+        border: 2px dashed rgba(255, 20, 147, 0.3);
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        margin: 15px 0;
+        cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -912,13 +1059,9 @@
       <h2 class="section-title">Mint Your Trading NFT</h2>
       <div class="mint-container">
         <div class="dropzone">
-          <div class="dropzone-content">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p>Drag & drop your screenshot here</p>
-            <span>or</span>
-            <button class="btn-modern upload">Upload File</button>
-          </div>
-          <input type="file" id="fileInput" accept="image/*" style="display:none;" />
+          <input type="file" id="fileInput" accept="image/*" style="display: none;">
+          <p>Drag & drop your screenshot here</p>
+          <button type="button" class="upload-btn">Upload File</button>
         </div>
         <button id="mint-button" class="btn-modern large">Mint NFT</button>
       </div>
